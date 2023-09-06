@@ -1,6 +1,7 @@
 import { forwardRef, PropsWithoutRef, ComponentPropsWithoutRef } from "react"
 import { useFormContext } from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
+import { Input, MantineSize } from "@mantine/core"
 
 export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
   /** Field name. */
@@ -12,9 +13,8 @@ export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElem
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
   labelProps?: ComponentPropsWithoutRef<"label">
 }
-
 export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
-  ({ label, outerProps, labelProps, name, ...props }, ref) => {
+  ({ label, outerProps, labelProps, type = "text", name, ...props }, ref) => {
     const {
       register,
       formState: { isSubmitting, errors },
@@ -24,7 +24,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       <div {...outerProps}>
         <label {...labelProps}>
           {label}
-          <input disabled={isSubmitting} {...register(name)} {...props} />
+          <Input disabled={isSubmitting} {...register(name)} {...props} />
         </label>
 
         <ErrorMessage
@@ -42,15 +42,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
             display: flex;
             flex-direction: column;
             align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
+            font- 1rem;
           }
         `}</style>
       </div>
