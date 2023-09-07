@@ -6,7 +6,6 @@ import {
   Text,
   Paper,
   Group,
-  PaperProps,
   Button,
   Divider,
   Checkbox,
@@ -21,9 +20,13 @@ import { AuthenticationError } from "blitz"
 import login from "@/features/auth/mutations/login"
 import signup from "@/features/auth/mutations/signup"
 
-export function AuthenticationForm(props: PaperProps) {
+type LoginFormProps = {
+  onSuccess?: (user: any) => void
+}
+
+export function AuthenticationForm(props: LoginFormProps) {
   const [type, toggle] = useToggle(["login", "register"])
-  const [loginMutation] = useMutation(login)
+  const [$login] = useMutation(login)
   const [signupMutation] = useMutation(signup)
 
   const form = useForm({
@@ -41,18 +44,8 @@ export function AuthenticationForm(props: PaperProps) {
   })
 
   const onLogin = async (values) => {
-    try {
-      const user = await loginMutation(values)
-    } catch (error: any) {
-      if (error instanceof AuthenticationError) {
-        return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
-      } else {
-        return {
-          [FORM_ERROR]:
-            "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
-        }
-      }
-    }
+    const user = await $login(values)
+    props.onSuccess?.(user)
   }
 
   const onSignUp = async (values) => {

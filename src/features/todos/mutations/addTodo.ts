@@ -10,7 +10,7 @@ export default resolver.pipe(
   resolver.authorize(),
   async (params, { session: { userId } }) => {
     const todoTitle = params
-    console.log("Creating a todo with title: ", todoTitle)
+    console.log("Creating a todo with title: ", todoTitle, " created by user: ", userId)
 
     return "Todo was added successfully"
   }
