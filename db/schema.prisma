@@ -12,6 +12,18 @@ generator client {
 
 // --------------------------------------
 
+model Todo {
+  id          String      @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  title       String
+  done        Boolean  @default(false)
+
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id])
+}
+
 model User {
   id             Int      @id @default(autoincrement())
   createdAt      DateTime @default(now())
@@ -21,6 +33,7 @@ model User {
   hashedPassword String?
   role           String   @default("USER")
 
+  todos    Todo[]
   tokens   Token[]
   sessions Session[]
 }

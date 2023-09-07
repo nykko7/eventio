@@ -3,29 +3,36 @@ import addTodo from "@/features/todos/mutations/addTodo"
 import getTodos from "@/features/todos/queries/getTodos"
 import { BlitzPage } from "@blitzjs/next"
 import { useMutation, useQuery } from "@blitzjs/rpc"
-import { List, Title, Text, Loader, Button } from "@mantine/core"
+import { List, Title, Text, Loader, Button, Input } from "@mantine/core"
 import { notifications } from "@mantine/notifications"
 import { Vertical } from "mantine-layout-components"
-import { Suspense } from "react"
+import { Suspense, useState } from "react"
 
 const Todos = () => {
   const [todos] = useQuery(getTodos, {})
 
+  const [todoTitle, setTodoTitle] = useState("")
+
   const [$addTodo] = useMutation(addTodo, {
-    onSuccess: (result) => {
+    onSuccess: (todo) => {
       notifications.show({
         title: "Todo added",
-        message: result,
+        message: `Created todo: ${todo.title}`,
         color: "green",
       })
     },
   })
-  const createTodo = () => {
-    $addTodo({ title: "New todo" })
+  const createTodo = async () => {
+    await $addTodo({ todoTitle })
   }
 
   return (
     <Vertical>
+      <Input
+        placeholder="Enter todo title"
+        value={todoTitle}
+        onChange={(event) => setTodoTitle(event.currentTarget.value)}
+      />
       <Button onClick={createTodo}>Create a todo</Button>
       <List>
         {todos.map((todo) => (
