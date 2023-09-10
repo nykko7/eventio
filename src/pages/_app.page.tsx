@@ -5,25 +5,24 @@ import "@/styles/globals.css"
 import { RootErrorFallback } from "@/core/components/RootErrorFallback"
 import { MantineProvider } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
+import FullPageLoader from "@/core/components/FullPageLoader"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ErrorBoundary FallbackComponent={RootErrorFallback}>
-      <Suspense fallback="Loading...">
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            colorScheme: "dark",
-          }}
-        >
-          <Notifications position="top-right" />
-          <Suspense fallback="Loading...">
-            <Component {...pageProps} />
-          </Suspense>
-        </MantineProvider>
-      </Suspense>
-    </ErrorBoundary>
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      theme={{
+        colorScheme: "dark",
+      }}
+    >
+      <ErrorBoundary FallbackComponent={RootErrorFallback}>
+        <Notifications position="top-right" />
+        <Suspense fallback={<FullPageLoader />}>
+          <Component {...pageProps} />
+        </Suspense>
+      </ErrorBoundary>
+    </MantineProvider>
   )
 }
 

@@ -1,10 +1,11 @@
 import { ErrorFallbackProps, ErrorComponent } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"
+import { MainAuthenticationForm } from "@/core/components/MainAuthenticationForm"
 import React from "react"
 
 export function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
-    return <div>Error: You are not authenticated</div>
+    return <MainAuthenticationForm />
   } else if (error instanceof AuthorizationError) {
     return (
       <ErrorComponent
