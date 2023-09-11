@@ -64,7 +64,9 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
               {user && (
                 <Horizontal center>
                   <Horizontal center spacing={"xs"}>
-                    <Text>{user.name}</Text>
+                    <Link href={Routes.EditProfilePage()}>
+                      <Text>{user.name}</Text>
+                    </Link>
                     {user.isAdmin && (
                       <Tooltip label="Admin User" color="dark">
                         <IconUserShield size={15} />
