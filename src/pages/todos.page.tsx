@@ -2,12 +2,16 @@ import Layout from "@/core/layouts/Layout"
 import addTodo from "@/features/todos/mutations/addTodo"
 import toggleTodo from "@/features/todos/mutations/toggleTodo"
 import getTodos from "@/features/todos/queries/getTodos"
+import { TodoFormType, TodoInput } from "@/features/todos/schemas"
+import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import { BlitzPage } from "@blitzjs/next"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import { List, Title, Text, Loader, Button, Input, Checkbox } from "@mantine/core"
+import { useForm, zodResolver } from "@mantine/form"
 import { notifications } from "@mantine/notifications"
 import { Horizontal, Vertical } from "mantine-layout-components"
 import { Suspense, useState } from "react"
+import { z } from "zod"
 
 const Todo = ({ todo, refetchTodos }) => {
   const [$toggleTodo] = useMutation(toggleTodo)
@@ -27,11 +31,12 @@ const Todo = ({ todo, refetchTodos }) => {
 }
 
 const Todos = () => {
+  const user = useCurrentUser()
   const [todos, { refetch }] = useQuery(getTodos, {})
 
   const [todoTitle, setTodoTitle] = useState("")
 
-  const [$addTodo] = useMutation(addTodo, {
+  const [$addTodo, { isLoading }] = useMutation(addTodo, {
     onSuccess: (todo) => {
       notifications.show({
         title: "Todo added",
@@ -42,23 +47,36 @@ const Todos = () => {
       refetch()
     },
   })
-  const createTodo = async () => {
-    await $addTodo({ todoTitle })
-  }
+
+  const form = useForm<TodoFormType>({
+    initialValues: {
+      todoTitle: "",
+    },
+    validate: zodResolver(TodoInput),
+  })
 
   return (
     <Vertical>
-      <Input
-        placeholder="Enter todo title"
-        value={todoTitle}
-        onChange={(event) => setTodoTitle(event.currentTarget.value)}
-      />
-      <Button onClick={createTodo}>Create a todo</Button>
-      <List>
-        {todos.map((todo) => (
-          <Todo todo={todo} key={todo.id} refetchTodos={refetch} />
-        ))}
-      </List>
+      {user && <Text>Hello {user.name}, here are your todos: </Text>}
+      <form
+        onSubmit={form.onSubmit(async (values) => {
+          await $addTodo({ ...values })
+        })}
+      >
+        <Input
+          placeholder="Enter todo title"
+          value={todoTitle}
+          onChange={(event) => setTodoTitle(event.currentTarget.value)}
+        />
+        <Button loading={isLoading} type="submit">
+          Create a todo
+        </Button>
+        <List>
+          {todos.map((todo) => (
+            <Todo todo={todo} key={todo.id} refetchTodos={refetch} />
+          ))}
+        </List>
+      </form>
     </Vertical>
   )
 }

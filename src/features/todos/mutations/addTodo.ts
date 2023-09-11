@@ -1,13 +1,9 @@
 import { resolver } from "@blitzjs/rpc"
 import db from "db"
-import { z } from "zod"
-
-const Input = z.object({
-  todoTitle: z.string(),
-})
+import { TodoInput } from "../schemas"
 
 export default resolver.pipe(
-  resolver.zod(Input),
+  resolver.zod(TodoInput),
   resolver.authorize(),
   async ({ todoTitle }, { session: { userId } }) => {
     const todo = await db.todo.create({
