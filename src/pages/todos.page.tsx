@@ -34,8 +34,6 @@ const Todos = () => {
   const user = useCurrentUser()
   const [todos, { refetch }] = useQuery(getTodos, {})
 
-  const [todoTitle, setTodoTitle] = useState("")
-
   const [$addTodo, { isLoading }] = useMutation(addTodo, {
     onSuccess: (todo) => {
       notifications.show({
@@ -63,11 +61,7 @@ const Todos = () => {
           await $addTodo({ ...values })
         })}
       >
-        <Input
-          placeholder="Enter todo title"
-          value={todoTitle}
-          onChange={(event) => setTodoTitle(event.currentTarget.value)}
-        />
+        <Input placeholder="Enter todo title" {...form.getInputProps("todoTitle")} />
         <Button loading={isLoading} type="submit">
           Create a todo
         </Button>
