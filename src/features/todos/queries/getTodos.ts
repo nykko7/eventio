@@ -8,6 +8,8 @@ export default resolver.pipe(
   resolver.zod(Input),
   resolver.authorize("ADMIN"),
   async ({}, { session: { userId } }) => {
+    throw new Error("You cannot access to database from the frontend!")
+
     const todos = await db.todo.findMany({
       where: {
         userId: userId,
