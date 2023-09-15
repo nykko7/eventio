@@ -1,6 +1,5 @@
 import { AuthenticationError, PromiseReturnType } from "blitz"
 import Link from "next/link"
-import { FORM_ERROR } from "@/core/components/Form"
 import login from "@/features/auth/mutations/login"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes } from "@blitzjs/next"

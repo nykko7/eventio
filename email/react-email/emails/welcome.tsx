@@ -1,3 +1,4 @@
+// import { APP_NAME } from "../../../src/config"
 import {
   Body,
   Button,
@@ -12,6 +13,7 @@ import {
   Text,
 } from "@react-email/components"
 import { ReactFC } from "mantine-layout-components/dist/types"
+
 import * as React from "react"
 
 const baseUrl = process.env.VERCEL_URL
@@ -33,7 +35,7 @@ export const EmailTemplateWelcome: ReactFC<{
   return (
     <Html>
       <Head />
-      <Preview>You're now ready to make live transactions with Stripe!</Preview>
+      <Preview>Welcome to Eventio!</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>

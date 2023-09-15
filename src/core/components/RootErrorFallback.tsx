@@ -1,6 +1,6 @@
 import { ErrorFallbackProps } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"
-import { MainAuthenticationForm } from "@/core/components/MainAuthenticationForm"
+import { MainAuthenticationForm } from "./MainAuthenticationForm"
 import React from "react"
 import { Vertical } from "mantine-layout-components"
 import { Paper, Text } from "@mantine/core"

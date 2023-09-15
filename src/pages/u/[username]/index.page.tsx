@@ -56,7 +56,7 @@ export const ProfilePage: BlitzPage = () => {
     },
   })
 
-  const [$requestVerificationEmail, { isLoading: isSendingEmail }] = useMutation(
+  const [$requestVerificationEmail, { isLoading: isSendingEmail, isSuccess }] = useMutation(
     requestVerificationEmail,
     {
       onSuccess: () => {
@@ -97,20 +97,36 @@ export const ProfilePage: BlitzPage = () => {
       <Layout title="Username">
         <Vertical spacing="md">
           {isOwner && !currentUser?.emailVerifiedAt && (
-            <Alert icon={<IconAlertCircle size={"1rem"} />} color="red" variant="outline">
+            <Alert
+              icon={<IconAlertCircle size={"1rem"} />}
+              color="red"
+              variant="outline"
+              title={isSuccess ? "Email sent!" : "Warning"}
+            >
               <Vertical>
-                <Text>Your email is still not verified. Please check your inbox.</Text>
-                <Button
-                  size="xs"
-                  color="red"
-                  variant="light"
-                  loading={isSendingEmail}
-                  onClick={async () => {
-                    await $requestVerificationEmail()
-                  }}
-                >
-                  Resend email
-                </Button>
+                {!isSuccess && (
+                  <>
+                    <Text>Your email is still not verified. Please check your inbox.</Text>
+                    <Button
+                      size="xs"
+                      color="red"
+                      variant="light"
+                      loading={isSendingEmail}
+                      onClick={async () => {
+                        await $requestVerificationEmail()
+                      }}
+                    >
+                      Resend email
+                    </Button>
+                  </>
+                )}
+                {isSuccess && (
+                  <Text size="xs">
+                    The email has been sent and should arrive in the next few minutes.
+                    <br />
+                    Please be patient and check your spam folder.
+                  </Text>
+                )}
               </Vertical>
             </Alert>
           )}

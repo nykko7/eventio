@@ -3,6 +3,7 @@ import { generateToken, hash256 } from "@blitzjs/auth"
 import db from "db"
 import { TokenType } from "@prisma/client"
 import { addHours } from "date-fns"
+import { EMAIL_VERIFY_LINK_IN_HOURS } from "@/config"
 
 export class PrismaError extends Error {
   code = "123"
@@ -61,8 +62,6 @@ export const formatZodError = (err: any) => {
     },
   })
 }
-
-const EMAIL_VERIFY_LINK_IN_HOURS = 4
 
 const createToken = async ({ userId, userEmail, tokenType }) => {
   const token = generateToken()

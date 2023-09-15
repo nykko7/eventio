@@ -1,5 +1,4 @@
 // import { APP_NAME } from "../../../src/config"
-
 import {
   Body,
   Button,
@@ -21,30 +20,31 @@ const baseUrl = process.env.VERCEL_URL
   : "http://localhost:3000"
 
 const defaultProps = {
-  emailVerifyUrl: "",
+  resetPasswordUrl: "http://localhost:3000",
 }
 
-export const EmailTemplateVerifyEmail: ReactFC<{
-  props: { emailVerifyUrl: string }
+export const EmailTemplateResetPassword: ReactFC<{
+  props: { resetPasswordUrl: string }
 }> = ({ props = defaultProps }) => {
-  const { emailVerifyUrl } = props
+  const { resetPasswordUrl } = props
 
   return (
     <Html>
       <Head />
-      <Preview>Verify your email for Eventio</Preview>
+      <Preview>Reset your password for Eventio</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>
             <Img src={`${baseUrl}/images/logo.png`} alt="Logo" width={98} height={42} />
             <Hr style={hr} />
             <Text style={paragraph}>
-              Hello, you requested this email for verifying your account. If you didn't request,
-              please ignore it
+              You recently requested to reset your password for your Eventio account. Click the
+              button below to reset it. If you did not request a password reset, please ignore this
+              email.
             </Text>
 
-            <Button pX={10} pY={10} style={button} href={emailVerifyUrl}>
-              Click here to verify your email
+            <Button pX={10} pY={10} style={button} href={resetPasswordUrl}>
+              Click here to reset your password
             </Button>
             <Hr style={hr} />
             <Text style={paragraph}>The eventio team</Text>
@@ -57,7 +57,7 @@ export const EmailTemplateVerifyEmail: ReactFC<{
   )
 }
 
-export default EmailTemplateVerifyEmail
+export default EmailTemplateResetPassword
 
 const main = {
   backgroundColor: "#f6f9fc",
