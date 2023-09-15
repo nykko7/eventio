@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "@/core/layouts/Layout"
 import { BlitzPage, Routes } from "@blitzjs/next"
 import { Vertical } from "mantine-layout-components"
-import { Box, Button, Modal, Text, TextInput, Textarea } from "@mantine/core"
+import { Alert, Box, Button, Modal, Text, TextInput, Textarea } from "@mantine/core"
 import { useStringParam } from "@/utils/utils"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import getUserForProfile from "@/features/users/queries/getUserForProfile"
@@ -14,6 +14,7 @@ import { UpdateProfileInput, UpdateProfileInputType } from "@/features/users/sch
 import { showNotification } from "@mantine/notifications"
 import { useRouter } from "next/router"
 import { EditProfileForm } from "@/features/users/forms/EditProfileForm"
+import { IconAlertCircle } from "@tabler/icons-react"
 
 export const ProfilePage: BlitzPage = () => {
   const username = useStringParam("username")
@@ -31,7 +32,7 @@ export const ProfilePage: BlitzPage = () => {
 
   const isOwner = currentUser?.id === user?.id
 
-  if (!user) return <Text>User not found :(</Text>
+  const router = useRouter()
 
   const form = useForm<UpdateProfileInputType>({
     initialValues: {
@@ -54,7 +55,7 @@ export const ProfilePage: BlitzPage = () => {
     },
   })
 
-  const router = useRouter()
+  if (!user) return <Text>User not found :(</Text>
 
   return (
     <>
@@ -81,6 +82,16 @@ export const ProfilePage: BlitzPage = () => {
 
       <Layout title="Username">
         <Vertical spacing="md">
+          {isOwner && !currentUser?.emailVerifiedAt && (
+            <Alert icon={<IconAlertCircle size={"1rem"} />} color="red" variant="outline">
+              <Vertical>
+                <Text>Your email is still not verified. Please check your inbox.</Text>
+                <Button size="xs" color="red" variant="light">
+                  Resend email
+                </Button>
+              </Vertical>
+            </Alert>
+          )}
           {isOwner && <Button onClick={open}>Edit Profile</Button>}
           <Text>Hello {user.name}</Text>
           <Text>Username: {user.username}</Text>
