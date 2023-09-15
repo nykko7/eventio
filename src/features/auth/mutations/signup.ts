@@ -3,6 +3,9 @@ import { resolver } from "@blitzjs/rpc"
 import db from "db"
 import { Role } from "types"
 import { SignupInput } from "../schemas"
+import { sendEmail } from "email/sendEmail"
+import React from "react"
+import WelcomeEmail from "email/react-email/emails/welcome"
 
 export default resolver.pipe(resolver.zod(SignupInput), async ({ email, name, password }, ctx) => {
   const hashedPassword = await SecurePassword.hash(password.trim())
@@ -22,6 +25,15 @@ export default resolver.pipe(resolver.zod(SignupInput), async ({ email, name, pa
     },
   })
   if (user) {
+    await sendEmail({
+      to: user.email,
+      subject: "Welcome to Eventio",
+      react: React.createElement(WelcomeEmail, {
+        props: {
+          name: user.name,
+        },
+      }),
+    })
     await ctx.session.$create({
       userId: user.id,
       role: user.role as Role,

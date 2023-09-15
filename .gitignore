@@ -10,6 +10,9 @@ node_modules
 .npm
 web_modules/
 
+# ./email/react-email/node_modules
+email/react-email/.react-email/
+
 .idea/
 
 # blitz
