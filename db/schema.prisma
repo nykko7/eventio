@@ -72,16 +72,18 @@ model Token {
   @@unique([hashedToken, type])
 }
 
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // NOTE: It's highly recommended to use an enum for the token type
 //       but enums only work in Postgres.
 //       See: https://blitzjs.com/docs/database-overview#switch-to-postgre-sql
 
 enum TokenType {
   RESET_PASSWORD
-}
-
-model Note {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  VERIFY_EMAIL
 }

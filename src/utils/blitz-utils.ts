@@ -1,4 +1,3 @@
-// inside utils/blitz-utils
 import { generateErrorMessage } from "zod-error"
 import { generateToken, hash256 } from "@blitzjs/auth"
 import db from "db"

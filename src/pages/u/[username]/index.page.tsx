@@ -15,6 +15,7 @@ import { showNotification } from "@mantine/notifications"
 import { useRouter } from "next/router"
 import { EditProfileForm } from "@/features/users/forms/EditProfileForm"
 import { IconAlertCircle } from "@tabler/icons-react"
+import requestVerificationEmail from "@/features/auth/mutations/requestVerificationEmail"
 
 export const ProfilePage: BlitzPage = () => {
   const username = useStringParam("username")
@@ -55,6 +56,19 @@ export const ProfilePage: BlitzPage = () => {
     },
   })
 
+  const [$requestVerificationEmail, { isLoading: isSendingEmail }] = useMutation(
+    requestVerificationEmail,
+    {
+      onSuccess: () => {
+        showNotification({
+          color: "green",
+          title: "Success",
+          message: "Verification email sent",
+        })
+      },
+    }
+  )
+
   if (!user) return <Text>User not found :(</Text>
 
   return (
@@ -86,7 +100,15 @@ export const ProfilePage: BlitzPage = () => {
             <Alert icon={<IconAlertCircle size={"1rem"} />} color="red" variant="outline">
               <Vertical>
                 <Text>Your email is still not verified. Please check your inbox.</Text>
-                <Button size="xs" color="red" variant="light">
+                <Button
+                  size="xs"
+                  color="red"
+                  variant="light"
+                  loading={isSendingEmail}
+                  onClick={async () => {
+                    await $requestVerificationEmail()
+                  }}
+                >
                   Resend email
                 </Button>
               </Vertical>

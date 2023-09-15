@@ -19,17 +19,14 @@ const baseUrl = process.env.VERCEL_URL
   : "http://localhost:3000"
 
 const defaultProps = {
-  name: "Test User",
   emailVerifyUrl: "",
 }
 
-export const EmailTemplateWelcome: ReactFC<{
-  props: { name?: string | null; emailVerifyUrl: string | null }
+export const EmailTemplateVerifyEmail: ReactFC<{
+  props: { emailVerifyUrl: string }
 }> = ({ props = defaultProps }) => {
-  const { name } = props
-  const welcomeMessage = name
-    ? `Hey there ${name}, thanks for signin up!`
-    : "Hey there, thanks for signin up!"
+  const { emailVerifyUrl } = props
+
   return (
     <Html>
       <Head />
@@ -39,9 +36,12 @@ export const EmailTemplateWelcome: ReactFC<{
           <Section style={box}>
             <Img src={`${baseUrl}/images/logo.png`} alt="Logo" width={98} height={42} />
             <Hr style={hr} />
-            <Text style={paragraph}>{welcomeMessage} welcome to our platform!</Text>
+            <Text style={paragraph}>
+              Hello, you requested this email for verifying your account. If you didn't request,
+              please ignore it
+            </Text>
 
-            <Button pX={10} pY={10} style={button} href="https://dashboard.stripe.com/login">
+            <Button pX={10} pY={10} style={button} href={emailVerifyUrl}>
               Click here to verify your email
             </Button>
             <Hr style={hr} />
@@ -55,7 +55,7 @@ export const EmailTemplateWelcome: ReactFC<{
   )
 }
 
-export default EmailTemplateWelcome
+export default EmailTemplateVerifyEmail
 
 const main = {
   backgroundColor: "#f6f9fc",
