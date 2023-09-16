@@ -11,11 +11,13 @@ import { useDisclosure } from "@mantine/hooks"
 import { Form, useForm, zodResolver } from "@mantine/form"
 import updateProfile from "@/features/users/mutations/updateProfile"
 import { UpdateProfileInput, UpdateProfileInputType } from "@/features/users/schemas"
-import { showNotification } from "@mantine/notifications"
+import { notifications, showNotification } from "@mantine/notifications"
 import { useRouter } from "next/router"
 import { EditProfileForm } from "@/features/users/forms/EditProfileForm"
 import { IconAlertCircle } from "@tabler/icons-react"
 import requestVerificationEmail from "@/features/auth/mutations/requestVerificationEmail"
+import { UploadButton } from "@/core/components/UploadThing"
+import "@uploadthing/react/styles.css"
 
 export const ProfilePage: BlitzPage = () => {
   const username = useStringParam("username")
