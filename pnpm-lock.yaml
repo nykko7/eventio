@@ -48,8 +48,8 @@ importers:
         specifier: ^6.0.20
         version: 6.0.20(@mantine/core@6.0.19)(@mantine/hooks@6.0.19)(react-dom@18.2.0)(react@18.2.0)
       '@prisma/client':
-        specifier: ^5.3.0
-        version: 5.3.0(prisma@5.3.0)
+        specifier: ^5.3.1
+        version: 5.3.1(prisma@5.3.1)
       '@t3-oss/env-nextjs':
         specifier: ^0.6.1
         version: 0.6.1(typescript@4.8.4)(zod@3.20.2)
@@ -57,8 +57,8 @@ importers:
         specifier: ^2.33.0
         version: 2.33.0(react@18.2.0)
       '@uploadthing/react':
-        specifier: ^5.6.0
-        version: 5.6.0(next@13.4.19)(react@18.2.0)(uploadthing@5.6.0)(zod@3.20.2)
+        specifier: ^5.6.1
+        version: 5.6.1(next@13.4.19)(react@18.2.0)(uploadthing@5.6.1)(zod@3.20.2)
       blitz:
         specifier: 2.0.0-beta.33
         version: 2.0.0-beta.33(@babel/preset-env@7.22.14)(@types/node@18.11.9)(@types/react@18.0.25)(react@18.2.0)(typescript@4.8.4)
@@ -72,11 +72,14 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2(@emotion/react@11.11.1)(@mantine/core@6.0.19)(@mantine/hooks@6.0.19)(react@18.2.0)
       next:
-        specifier: 13.4.19
+        specifier: ^13.4.19
         version: 13.4.19(@babel/core@7.22.11)(react-dom@18.2.0)(react@18.2.0)
       nodemailer:
         specifier: ^6.9.5
         version: 6.9.5
+      prisma:
+        specifier: ^5.3.1
+        version: 5.3.1
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -93,8 +96,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       uploadthing:
-        specifier: ^5.6.0
-        version: 5.6.0(zod@3.20.2)
+        specifier: ^5.6.1
+        version: 5.6.1(zod@3.20.2)
       zod:
         specifier: 3.20.2
         version: 3.20.2
@@ -144,9 +147,6 @@ importers:
       preview-email:
         specifier: 3.0.7
         version: 3.0.7
-      prisma:
-        specifier: ^5.3.0
-        version: 5.3.0
       typescript:
         specifier: ^4.8.4
         version: 4.8.4
@@ -3692,8 +3692,8 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@prisma/client@5.3.0(prisma@5.3.0):
-    resolution: {integrity: sha512-cduYBlwj6oBfAUx2OI5i7t3NlpVeOtkN7pAqv0cw0B6gs4y8cY1mr8ZYywja0NUCOCqEWDkcZWBTVBwm6mnRIw==}
+  /@prisma/client@5.3.1(prisma@5.3.1):
+    resolution: {integrity: sha512-ArOKjHwdFZIe1cGU56oIfy7wRuTn0FfZjGuU/AjgEBOQh+4rDkB6nF+AGHP8KaVpkBIiHGPQh3IpwQ3xDMdO0Q==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -3702,17 +3702,18 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 5.3.0-36.e90b936d84779543cbe0e494bc8b9d7337fad8e4
-      prisma: 5.3.0
+      '@prisma/engines-version': 5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59
+      prisma: 5.3.1
     dev: false
 
-  /@prisma/engines-version@5.3.0-36.e90b936d84779543cbe0e494bc8b9d7337fad8e4:
-    resolution: {integrity: sha512-uftIog5FQ/OUR8Vb9TzpNBJ6L+zJnBgmd1A0uPJUzuvGMU32UmeyobpdXVzST5UprKryTdWOYXQFVyiQ2OU4Nw==}
+  /@prisma/engines-version@5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59:
+    resolution: {integrity: sha512-y5qbUi3ql2Xg7XraqcXEdMHh0MocBfnBzDn5GbV1xk23S3Mq8MGs+VjacTNiBh3dtEdUERCrUUG7Z3QaJ+h79w==}
     dev: false
 
-  /@prisma/engines@5.3.0:
-    resolution: {integrity: sha512-3U3u/pa+QYfrV2z2rU6cBmzOZYPVEh1cXvg35PbaYFBQipFep54tp+mD9KJhlouT57pMKPERgjcPFR+UZ/BWjg==}
+  /@prisma/engines@5.3.1:
+    resolution: {integrity: sha512-6QkILNyfeeN67BNEPEtkgh3Xo2tm6D7V+UhrkBbRHqKw9CTaz/vvTP/ROwYSP/3JT2MtIutZm/EnhxUiuOPVDA==}
     requiresBuild: true
+    dev: false
 
   /@prisma/prisma-fmt-wasm@4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6:
     resolution: {integrity: sha512-Hc2i5nfAt3nLDUkQNWJcKFJaA9Avd5zz6t85w9SW7P0vGtFXScQ+xIu6znbULr9bc0pgTWejY1We2u/7EMxHWw==}
@@ -4972,8 +4973,8 @@ packages:
     resolution: {integrity: sha512-UDySsPbdi7wp52WG7mp5CiZwaTvokDubqhm1xhFm73Bqhp0PsGbwSSF5PdCXH4fe8Y4EKGrMyWQ4i1fF9+DVVQ==}
     dev: false
 
-  /@uploadthing/react@5.6.0(next@13.4.19)(react@18.2.0)(uploadthing@5.6.0)(zod@3.20.2):
-    resolution: {integrity: sha512-Yu7uODrgZrobz2vSzlvyWrScmzj35sao34v49HPfOCYBQS4npuvUz0EgMjU320OA8uFcBBnmPvIqtzUPc2wyxg==}
+  /@uploadthing/react@5.6.1(next@13.4.19)(react@18.2.0)(uploadthing@5.6.1)(zod@3.20.2):
+    resolution: {integrity: sha512-uVd4I26OudpUcikobDFBMl9mG0vlhdXmK57oidCIrvfgNfKZOehpW+pqe1nUWE8HoYquJ1iK4OrmrfX8hOK2MA==}
     peerDependencies:
       next: '*'
       react: ^17.0.2 || ^18.0.0
@@ -4988,7 +4989,7 @@ packages:
       next: 13.4.19(@babel/core@7.22.11)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       tailwind-merge: 1.14.0
-      uploadthing: 5.6.0(zod@3.20.2)
+      uploadthing: 5.6.1(zod@3.20.2)
     transitivePeerDependencies:
       - '@uploadthing/mime-types'
       - zod
@@ -10677,13 +10678,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /prisma@5.3.0:
-    resolution: {integrity: sha512-eLUR2gyKk8iRLAfy1H3Jel4SZQmjauTPTYX4UFFmwrMTrPnQzipspt48s6e45H5PKYq9zT5MQ9qWbkq9Ru4EAg==}
+  /prisma@5.3.1:
+    resolution: {integrity: sha512-Wp2msQIlMPHe+5k5Od6xnsI/WNG7UJGgFUJgqv/ygc7kOECZapcSz/iU4NIEzISs3H1W9sFLjAPbg/gOqqtB7A==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.3.0
+      '@prisma/engines': 5.3.1
+    dev: false
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -12511,8 +12513,8 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
 
-  /uploadthing@5.6.0(zod@3.20.2):
-    resolution: {integrity: sha512-IMJc33MheVlF7tTmAEfBTtqSoN9DVJgdfcKI8Ci+cmbcQHNzMAUi8+UarKtj9/HpdRiA+SeykQAiMK0bKeIqGA==}
+  /uploadthing@5.6.1(zod@3.20.2):
+    resolution: {integrity: sha512-lWVMCoAmZ33mahV6NS7oW+eQl++jnYEuaR3zh9PlrEt6P8lkl3GPDUE5iWywBx+pK9HewIqZvaZXQvzKOjOlMg==}
     dependencies:
       '@uploadthing/mime-types': 0.2.1
       '@uploadthing/shared': 5.2.2(@uploadthing/mime-types@0.2.1)(zod@3.20.2)
