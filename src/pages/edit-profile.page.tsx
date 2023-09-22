@@ -12,15 +12,7 @@ import { useRouter } from "next/router"
 import getUserForEditingProfile from "@/features/users/queries/getUserForEditingProfile"
 
 export const EditProfilePage: BlitzPage = () => {
-  const [$updateProfile, { isLoading }] = useMutation(updateProfile, {
-    onSuccess: () => {
-      showNotification({
-        color: "green",
-        title: "Success",
-        message: "Profile updated",
-      })
-    },
-  })
+  const [$updateProfile, { isLoading }] = useMutation(updateProfile)
 
   const [data] = useQuery(getUserForEditingProfile, {})
 
@@ -46,6 +38,11 @@ export const EditProfilePage: BlitzPage = () => {
           onSubmit={async (values) => {
             await $updateProfile(values)
             const { username } = values
+            showNotification({
+              color: "green",
+              title: "Success",
+              message: "Profile updated",
+            })
             if (username) router.push(Routes.ProfilePage({ username }))
           }}
           isSubmitting={isLoading}

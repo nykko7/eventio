@@ -48,16 +48,7 @@ export const ProfilePage: BlitzPage = () => {
     validateInputOnBlur: true,
   })
 
-  const [$updateProfile, { isLoading }] = useMutation(updateProfile, {
-    onSuccess: () => {
-      showNotification({
-        color: "green",
-        title: "Success",
-        message: "Profile updated",
-      })
-      close()
-    },
-  })
+  const [$updateProfile, { isLoading }] = useMutation(updateProfile)
 
   const [$requestVerificationEmail, { isLoading: isSendingEmail, isSuccess }] = useMutation(
     requestVerificationEmail,
@@ -89,6 +80,12 @@ export const ProfilePage: BlitzPage = () => {
           onSubmit={async (values) => {
             await $updateProfile(values)
             const { username } = values
+            showNotification({
+              color: "green",
+              title: "Success",
+              message: "Profile updated",
+            })
+            close()
             if (username === user.username) {
               if (username) router.push(Routes.ProfilePage({ username }))
             }
