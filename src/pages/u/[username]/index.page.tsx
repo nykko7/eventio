@@ -131,12 +131,14 @@ export const ProfilePage: BlitzPage = () => {
             </Alert>
           )}
           {isOwner && <Button onClick={open}>Edit Profile</Button>}
-          <Image
-            width="300px"
-            height="200px"
-            fit="cover"
-            src={getUploadthingUrl(user.coverImageKey)}
-          />
+          {user.coverImageKey && (
+            <Image
+              width="300px"
+              height="200px"
+              fit="cover"
+              src={getUploadthingUrl(user.coverImageKey)}
+            />
+          )}
           <Text>Hello {user.name}</Text>
           <Text>Username: {user.username}</Text>
           <Text>Bio: {user.bio}</Text>

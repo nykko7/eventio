@@ -42,7 +42,6 @@ export const EditProfileForm: ReactFC<{
         <TextInput
           w="100%"
           label="Username"
-          required
           placeholder="Your username"
           {...form.getInputProps("username")}
           radius="md"
@@ -50,7 +49,6 @@ export const EditProfileForm: ReactFC<{
         <Textarea
           w="100%"
           label="Bio"
-          required
           placeholder="Your bio"
           {...form.getInputProps("bio")}
           radius="md"

@@ -5,10 +5,13 @@ import {
   Anchor,
   AppShell,
   Avatar,
+  Box,
   Button,
   Footer,
   Header,
+  Indicator,
   Loader,
+  RingProgress,
   Text,
   Tooltip,
 } from "@mantine/core"
@@ -22,6 +25,7 @@ import { RootErrorFallback } from "../components/RootErrorFallback"
 import { useRouter } from "next/router"
 import Conditional from "conditional-wrap"
 import UserAvatar from "../components/UserAvatar"
+import UserProfileProgress from "../components/Header/UserProfileProgress"
 
 type Props = {
   title?: string
@@ -81,16 +85,30 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
                       }}
                     >
                       <Horizontal>
-                        <UserAvatar user={user} />
+                        <Conditional
+                          condition={user.isAdmin}
+                          wrap={(children) => (
+                            <Indicator
+                              color="none"
+                              position="bottom-end"
+                              label={
+                                <Tooltip label="Admin User" color="dark">
+                                  <Box>
+                                    <IconUserShield size={15} />
+                                  </Box>
+                                </Tooltip>
+                              }
+                            >
+                              {children}
+                            </Indicator>
+                          )}
+                        >
+                          <UserAvatar user={user} />
+                        </Conditional>
                         <Text>{user.name}</Text>
+                        <UserProfileProgress />
                       </Horizontal>
                     </Conditional>
-
-                    {user.isAdmin && (
-                      <Tooltip label="Admin User" color="dark">
-                        <IconUserShield size={15} />
-                      </Tooltip>
-                    )}
                   </Horizontal>
                   <Button
                     size="xs"

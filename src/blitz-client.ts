@@ -17,6 +17,8 @@ export const { withBlitz } = setupBlitzClient({
         },
         mutations: {
           onSuccess: async () => {
+            // N.B. this will be overridden in case you
+            // define onSuccess() inside your `useMutation` options
             const queryClient = getQueryClient()
             await queryClient.invalidateQueries()
           },
