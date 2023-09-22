@@ -31,6 +31,8 @@ export const EditProfilePage: BlitzPage = () => {
       username: data?.username || "",
       name: data?.name || "",
       bio: data?.bio || "",
+      avatarImageKey: data?.avatarImageKey || "",
+      coverImageKey: data?.coverImageKey || "",
     },
   })
 

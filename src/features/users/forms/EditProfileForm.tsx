@@ -1,11 +1,27 @@
 import { Form, UseFormReturnType } from "@mantine/form"
-import { Vertical } from "mantine-layout-components"
+import { Horizontal, Vertical } from "mantine-layout-components"
 import React from "react"
 import { UpdateProfileInputType } from "../schemas"
-import { Button, TextInput, Textarea } from "@mantine/core"
+import {
+  Button,
+  FileInput,
+  Loader,
+  TextInput,
+  Textarea,
+  Text,
+  Image,
+  Indicator,
+  ActionIcon,
+  Tooltip,
+  Avatar,
+} from "@mantine/core"
 import { ReactFC } from "types"
-import { UploadButton } from "@/core/components/UploadThing"
-import { notifications } from "@mantine/notifications"
+import { UploadButton, useUploadThing } from "@/core/components/UploadThing"
+import { notifications, showNotification } from "@mantine/notifications"
+import { IconPhoto, IconX } from "@tabler/icons-react"
+import { useBoolean } from "react-hanger"
+import { getUploadthingUrl } from "@/utils/image-utils"
+import UploadThingFileInput from "@/core/components/UploadThingFileInput"
 
 export const EditProfileForm: ReactFC<{
   form: UseFormReturnType<UpdateProfileInputType>
@@ -39,32 +55,9 @@ export const EditProfileForm: ReactFC<{
           {...form.getInputProps("bio")}
           radius="md"
         />
-        <UploadButton
-          endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
-            const fileKey = res?.[0]?.key
+        <UploadThingFileInput form={form} name="avatarImageKey" label="Profile Picture" />
+        <UploadThingFileInput form={form} name="coverImageKey" label="Cover Image" />
 
-            // Do something with the response
-            console.log("Files: ", res)
-            notifications.show({
-              color: "green",
-              title: "Success",
-              message: "Image uploaded!",
-            })
-            form.setFieldValue("avatarImageKey", fileKey)
-          }}
-          onUploadError={(error: Error) => {
-            // Do something with the error.
-            console.log(`message: ${error.message} |
-            cause: ${error.cause}
-          `)
-            notifications.show({
-              color: "red",
-              title: "Error",
-              message: error.message,
-            })
-          }}
-        />
         <Button disabled={!form.isValid()} loading={isSubmitting} type="submit">
           Save
         </Button>

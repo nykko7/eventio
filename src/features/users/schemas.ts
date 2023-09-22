@@ -6,6 +6,7 @@ export const UpdateProfileInput = z.object({
   username: z.string().optional(),
   bio: z.string().optional(),
   avatarImageKey: z.string().optional(),
+  coverImageKey: z.string().optional(),
 })
 
 export type UpdateProfileInputType = z.infer<typeof UpdateProfileInput>
