@@ -16,8 +16,6 @@ import { useRouter } from "next/router"
 import { EditProfileForm } from "@/features/users/forms/EditProfileForm"
 import { IconAlertCircle } from "@tabler/icons-react"
 import requestVerificationEmail from "@/features/auth/mutations/requestVerificationEmail"
-import { UploadButton } from "@/core/components/UploadThing"
-import "@uploadthing/react/styles.css"
 
 export const ProfilePage: BlitzPage = () => {
   const username = useStringParam("username")

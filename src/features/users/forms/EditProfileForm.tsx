@@ -42,7 +42,7 @@ export const EditProfileForm: ReactFC<{
         <UploadButton
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
-            // const fileKey = res?.[0]?.key
+            const fileKey = res?.[0]?.key
 
             // Do something with the response
             console.log("Files: ", res)
@@ -51,6 +51,7 @@ export const EditProfileForm: ReactFC<{
               title: "Success",
               message: "Image uploaded!",
             })
+            form.setFieldValue("avatarImageKey", fileKey)
           }}
           onUploadError={(error: Error) => {
             // Do something with the error.

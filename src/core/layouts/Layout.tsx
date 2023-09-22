@@ -4,12 +4,11 @@ import { BlitzLayout, ErrorBoundary, Routes } from "@blitzjs/next"
 import {
   Anchor,
   AppShell,
-  Box,
+  Avatar,
   Button,
   Footer,
   Header,
   Loader,
-  Navbar,
   Text,
   Tooltip,
 } from "@mantine/core"
@@ -22,6 +21,7 @@ import { IconUserShield } from "@tabler/icons-react"
 import { RootErrorFallback } from "../components/RootErrorFallback"
 import { useRouter } from "next/router"
 import Conditional from "conditional-wrap"
+import UserAvatar from "../components/UserAvatar"
 
 type Props = {
   title?: string
@@ -80,7 +80,10 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
                         )
                       }}
                     >
-                      <Text>{user.name}</Text>
+                      <Horizontal>
+                        <UserAvatar user={user} />
+                        <Text>{user.name}</Text>
+                      </Horizontal>
                     </Conditional>
 
                     {user.isAdmin && (
