@@ -1,26 +1,9 @@
 import { Form, UseFormReturnType } from "@mantine/form"
-import { Horizontal, Vertical } from "mantine-layout-components"
+import { Vertical } from "mantine-layout-components"
 import React from "react"
 import { UpdateProfileInputType } from "../schemas"
-import {
-  Button,
-  FileInput,
-  Loader,
-  TextInput,
-  Textarea,
-  Text,
-  Image,
-  Indicator,
-  ActionIcon,
-  Tooltip,
-  Avatar,
-} from "@mantine/core"
+import { Button, TextInput, Textarea } from "@mantine/core"
 import { ReactFC } from "types"
-import { UploadButton, useUploadThing } from "@/core/components/UploadThing"
-import { notifications, showNotification } from "@mantine/notifications"
-import { IconPhoto, IconX } from "@tabler/icons-react"
-import { useBoolean } from "react-hanger"
-import { getUploadthingUrl } from "@/utils/image-utils"
 import UploadThingFileInput from "@/core/components/UploadThingFileInput"
 
 export const EditProfileForm: ReactFC<{

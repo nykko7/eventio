@@ -34,17 +34,7 @@ const Todos = () => {
   const user = useCurrentUser()
   const [todos, { refetch }] = useQuery(getTodos, {})
 
-  const [$addTodo, { isLoading }] = useMutation(addTodo, {
-    onSuccess: (todo) => {
-      notifications.show({
-        title: "Todo added",
-        message: `Created todo: ${todo.title}`,
-        color: "green",
-      })
-
-      refetch()
-    },
-  })
+  const [$addTodo, { isLoading }] = useMutation(addTodo)
 
   const form = useForm<TodoFormType>({
     initialValues: {
@@ -59,6 +49,13 @@ const Todos = () => {
       <form
         onSubmit={form.onSubmit(async (values) => {
           await $addTodo({ ...values })
+          notifications.show({
+            title: "Todo added",
+            message: `Created todo: ${values.todoTitle}`,
+            color: "green",
+          })
+
+          refetch()
         })}
       >
         <Input placeholder="Enter todo title" {...form.getInputProps("todoTitle")} />

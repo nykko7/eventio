@@ -6,6 +6,8 @@ import { RootErrorFallback } from "@/core/components/RootErrorFallback"
 import { MantineProvider } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
 import FullPageLoader from "@/core/components/FullPageLoader"
+import { ModalsProvider } from "@mantine/modals"
+import { globalModals } from "@/modals"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,12 +18,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         colorScheme: "dark",
       }}
     >
-      <ErrorBoundary FallbackComponent={RootErrorFallback}>
-        <Notifications position="top-right" />
-        <Suspense fallback={<FullPageLoader />}>
-          <Component {...pageProps} />
-        </Suspense>
-      </ErrorBoundary>
+      <ModalsProvider modals={globalModals}>
+        <ErrorBoundary FallbackComponent={RootErrorFallback}>
+          <Notifications position="top-right" />
+          <Suspense fallback={<FullPageLoader />}>
+            <Component {...pageProps} />
+          </Suspense>
+        </ErrorBoundary>
+      </ModalsProvider>
     </MantineProvider>
   )
 }

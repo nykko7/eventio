@@ -4,14 +4,13 @@ import { BlitzLayout, ErrorBoundary, Routes } from "@blitzjs/next"
 import {
   Anchor,
   AppShell,
-  Avatar,
   Box,
   Button,
   Footer,
   Header,
   Indicator,
   Loader,
-  RingProgress,
+  Modal,
   Text,
   Tooltip,
 } from "@mantine/core"
@@ -26,6 +25,7 @@ import { useRouter } from "next/router"
 import Conditional from "conditional-wrap"
 import UserAvatar from "../components/UserAvatar"
 import UserProfileProgress from "../components/Header/UserProfileProgress"
+import OnboardingWizard from "../components/OnboardingWizard"
 
 type Props = {
   title?: string
@@ -106,9 +106,9 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
                           <UserAvatar user={user} />
                         </Conditional>
                         <Text>{user.name}</Text>
-                        <UserProfileProgress />
                       </Horizontal>
                     </Conditional>
+                    <UserProfileProgress />
                   </Horizontal>
                   <Button
                     size="xs"
@@ -150,6 +150,18 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
                 </Vertical>
               }
             >
+              <Modal
+                size={"xl"}
+                centered
+                title="Onboarding Modal"
+                opened={!user?.onboarded}
+                closeOnClickOutside={false}
+                closeOnEscape={false}
+                withCloseButton={false}
+                onClose={() => {}}
+              >
+                <OnboardingWizard />
+              </Modal>
               {children}
             </Suspense>
           </ErrorBoundary>

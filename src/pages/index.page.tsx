@@ -4,24 +4,43 @@ import { MainAuthenticationForm } from "@/core/components/MainAuthenticationForm
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser"
 import { Vertical } from "mantine-layout-components"
 import { Button } from "@mantine/core"
-import adminOnlyMutation from "@/features/auth/mutations/adminOnlyMutation"
-import { useMutation } from "@blitzjs/rpc"
+import { openContextModal } from "@mantine/modals"
+import { GlobalModal } from "@/modals"
+import { confirmDelete } from "@/utils/mantine-utils"
 
 const Home: BlitzPage = () => {
   const user = useCurrentUser()
-  const [$adminOnlyMutation] = useMutation(adminOnlyMutation)
+
+  const deleteAccountMutation = () => {
+    console.log("Deleting account...")
+  }
 
   return (
     <Layout title="Home">
-      {user?.isAdmin && (
+      {user && (
         <Vertical center fullW fullH>
           <h1>Welcome to Eventio</h1>
-          {!user.isAdmin && (
-            <>
-              <h2>You are an admin</h2>
-              <Button onClick={() => $adminOnlyMutation({})}>Admin Only Button</Button>
-            </>
-          )}
+          <Button
+            onClick={() => {
+              openContextModal({
+                modal: GlobalModal.becomePro,
+                title: "Modal title",
+                innerProps: {},
+              })
+            }}
+          >
+            Become a pro modal
+          </Button>
+          <Button
+            color="red"
+            onClick={() => {
+              confirmDelete(() => {
+                deleteAccountMutation()
+              }, {})
+            }}
+          >
+            Delete account
+          </Button>
         </Vertical>
       )}
 

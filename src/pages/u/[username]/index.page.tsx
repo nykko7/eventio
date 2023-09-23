@@ -50,18 +50,8 @@ export const ProfilePage: BlitzPage = () => {
 
   const [$updateProfile, { isLoading }] = useMutation(updateProfile)
 
-  const [$requestVerificationEmail, { isLoading: isSendingEmail, isSuccess }] = useMutation(
-    requestVerificationEmail,
-    {
-      onSuccess: () => {
-        showNotification({
-          color: "green",
-          title: "Success",
-          message: "Verification email sent",
-        })
-      },
-    }
-  )
+  const [$requestVerificationEmail, { isLoading: isSendingEmail, isSuccess }] =
+    useMutation(requestVerificationEmail)
 
   if (!user) return <Text>User not found :(</Text>
 
@@ -85,10 +75,12 @@ export const ProfilePage: BlitzPage = () => {
               title: "Success",
               message: "Profile updated",
             })
-            close()
-            if (username === user.username) {
+            if (username !== user.username) {
               if (username) router.push(Routes.ProfilePage({ username }))
+            } else {
+              router.reload()
             }
+            close()
           }}
           isSubmitting={isLoading}
         />
@@ -114,6 +106,11 @@ export const ProfilePage: BlitzPage = () => {
                       loading={isSendingEmail}
                       onClick={async () => {
                         await $requestVerificationEmail()
+                        showNotification({
+                          color: "green",
+                          title: "Success",
+                          message: "Verification email sent",
+                        })
                       }}
                     >
                       Resend email

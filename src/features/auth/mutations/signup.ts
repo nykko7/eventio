@@ -16,6 +16,7 @@ export default resolver.pipe(resolver.zod(SignupInput), async ({ email, name, pa
       name,
       hashedPassword,
       role: "USER",
+      onboarded: false,
     },
     select: {
       id: true,
